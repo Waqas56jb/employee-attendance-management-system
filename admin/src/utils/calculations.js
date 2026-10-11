@@ -12,6 +12,7 @@
  */
 import { addDays, differenceInMinutes, format } from 'date-fns';
 import { toDate, toDateKey } from './dateUtils';
+import { draftLabel } from './invoiceNumber';
 
 /* ------------------------------------------------------------------------- */
 /* Status vocabularies                                                        */
@@ -270,7 +271,7 @@ export function classifyForBilling(record, ctx = {}) {
     return {
       eligible: false,
       code: EXCLUSION_CODE.IN_DRAFT,
-      reason: `Included in draft ${draft.invoiceNumber || 'invoice'}`,
+      reason: `Included in draft ${draftLabel(draft.id)}`,
     };
   }
   if (!ctx.rate) {

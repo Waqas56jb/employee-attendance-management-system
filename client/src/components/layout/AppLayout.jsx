@@ -43,39 +43,39 @@ export function AppLayout() {
 
   return (
     <ShiftDialogProvider>
-    <div className="min-h-screen bg-canvas">
-      <a
-        href="#main-content"
-        className="sr-only z-50 rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
-      >
-        Skip to main content
-      </a>
-      <AppSidebar onLogout={requestLogout} />
-      <div className="flex min-h-screen flex-col lg:pl-64">
-        <Topbar onLogout={requestLogout} />
-        <MobileHeader onLogout={requestLogout} />
-        <main id="main-content" ref={mainRef} tabIndex={-1} className="flex-1 outline-none">
-          <Outlet />
-        </main>
-      </div>
-      <MobileBottomNav onLogout={requestLogout} />
+      <div className="min-h-screen bg-canvas">
+        <a
+          href="#main-content"
+          className="sr-only z-50 rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+        >
+          Skip to main content
+        </a>
+        <AppSidebar onLogout={requestLogout} />
+        <div className="flex min-h-screen flex-col lg:pl-64">
+          <Topbar onLogout={requestLogout} />
+          <MobileHeader onLogout={requestLogout} />
+          <main id="main-content" ref={mainRef} tabIndex={-1} className="flex-1 outline-none">
+            <Outlet />
+          </main>
+        </div>
+        <MobileBottomNav onLogout={requestLogout} />
 
-      <ConfirmDialog
-        open={confirmLogout}
-        title="Log out?"
-        description={
-          activeShift
-            ? 'Your shift is still running. Logging out does not end it — the timer keeps counting until you check out.'
-            : 'You will need to sign in again to record attendance.'
-        }
-        confirmLabel="Log out"
-        tone={activeShift ? 'danger' : 'primary'}
-        icon={LogOut}
-        loading={loggingOut}
-        onConfirm={handleLogout}
-        onCancel={() => setConfirmLogout(false)}
-      />
-    </div>
+        <ConfirmDialog
+          open={confirmLogout}
+          title="Log out?"
+          description={
+            activeShift
+              ? 'Your shift is still running. Logging out does not end it — the timer keeps counting until you check out.'
+              : 'You will need to sign in again to record attendance.'
+          }
+          confirmLabel="Log out"
+          tone={activeShift ? 'danger' : 'primary'}
+          icon={LogOut}
+          loading={loggingOut}
+          onConfirm={handleLogout}
+          onCancel={() => setConfirmLogout(false)}
+        />
+      </div>
     </ShiftDialogProvider>
   );
 }

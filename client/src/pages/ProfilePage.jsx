@@ -3,6 +3,7 @@ import { Avatar } from '../components/common/Avatar';
 import { Badge } from '../components/common/Badge';
 import { Card, CardHeader } from '../components/common/Card';
 import { PageHeader } from '../components/common/PageHeader';
+import { Tooltip } from '../components/common/Tooltip';
 import { PageContainer } from '../components/layout/PageContainer';
 import { ProfileForm } from '../components/profile/ProfileForm';
 import { useAuth } from '../hooks/useAuth';
@@ -63,9 +64,11 @@ export function ProfilePage() {
               title="Employment details"
               description="Managed by your administrator"
               action={
-                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-subtle text-ink-muted" title="Read-only">
-                  <Lock size={15} aria-label="Read-only" />
-                </span>
+                <Tooltip content="Read-only — managed by your administrator">
+                  <span tabIndex={0} className="flex h-8 w-8 items-center justify-center rounded-lg bg-subtle text-ink-muted" aria-label="Read-only">
+                    <Lock size={15} aria-hidden="true" />
+                  </span>
+                </Tooltip>
               }
             />
             <dl className="space-y-4">

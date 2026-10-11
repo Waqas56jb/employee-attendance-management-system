@@ -368,12 +368,37 @@ export function createDemoData(now = new Date()) {
   }));
   const projectsById = Object.fromEntries(projects.map((p) => [p.id, p]));
 
+  // When the demo is first opened on a weekday afternoon, include a finished
+  // morning shift so "today" and "this week" are not empty during a demo.
+  const morningStart = atTime(today, '07:30');
+  const morningMinutes = Math.min(270, Math.floor((now - morningStart) / 60_000) - 60);
+  const todayShift =
+    !isWeekend(now) && morningMinutes >= 120
+      ? [
+          {
+            id: 'att-1001-000',
+            employeeId: DEMO_EMPLOYEE_ID,
+            customerId: 'cust-03',
+            projectId: 'proj-301',
+            checkInAt: morningStart.toISOString(),
+            checkOutAt: addMinutes(morningStart, morningMinutes).toISOString(),
+            durationMinutes: morningMinutes,
+            status: 'completed',
+            checkInNote: 'Aisle 7 cabling.',
+            checkOutNote: 'Aisle 7 cameras connected and recording.',
+            checkInLocation: null,
+            checkOutLocation: null,
+          },
+        ]
+      : [];
+
   const attendance = [
+    ...todayShift,
     ...buildAttendance(attendanceTemplates, DEMO_EMPLOYEE_ID, projectsById, now, 'att-1001'),
     ...buildAttendance(otherEmployeeAttendance, OTHER_EMPLOYEE_ID, projectsById, now, 'att-1002'),
   ];
 
-  const lastShift = attendance[0];
+  const lastShift = attendance.find((r) => r.id === 'att-1001-001');
 
   const notifications = [
     {
@@ -433,7 +458,7 @@ export function createDemoData(now = new Date()) {
       message: 'Check-in confirmed for Clinic HVAC Controls Retrofit at Meridian Health Clinic.',
       type: 'shift-confirmation',
       link: '/attendance',
-      createdAt: attendance[1].checkInAt,
+      createdAt: attendance.find((r) => r.id === 'att-1001-002').checkInAt,
       isRead: true,
     },
     {

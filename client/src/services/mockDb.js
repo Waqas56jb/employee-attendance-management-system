@@ -7,7 +7,7 @@ import { STORAGE_KEYS, readJSON, removeKey, writeJSON } from '../utils/storage';
  * read from here; components never touch it directly.
  */
 
-const SEED_VERSION = 3;
+const SEED_VERSION = 4;
 
 const COLLECTIONS = ['employees', 'customers', 'projects', 'attendance', 'notifications'];
 
