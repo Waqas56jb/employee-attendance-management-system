@@ -64,7 +64,7 @@ export function ProfilePage() {
               title="Employment details"
               description="Managed by your administrator"
               action={
-                <Tooltip content="Read-only — managed by your administrator">
+                <Tooltip content="Read-only — managed by your administrator" align="end">
                   <span tabIndex={0} className="flex h-8 w-8 items-center justify-center rounded-lg bg-subtle text-ink-muted" aria-label="Read-only">
                     <Lock size={15} aria-hidden="true" />
                   </span>

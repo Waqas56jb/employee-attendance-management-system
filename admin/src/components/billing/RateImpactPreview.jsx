@@ -3,7 +3,7 @@ import { Calculator } from 'lucide-react';
 import clsx from 'clsx';
 import { formatMoney } from '../../utils/currency';
 import { formatDate } from '../../utils/dateUtils';
-import { formatHoursValue, formatNumber, pluralize } from '../../utils/formatters';
+import { formatHoursValue, pluralize } from '../../utils/formatters';
 import { invoiceLabel } from '../../services/invoiceService';
 
 /**
@@ -36,7 +36,7 @@ export function RateImpactPreview({ impact, currency, effectiveFrom }) {
         <div>
           <dt className="text-2xs font-medium uppercase tracking-wide text-ink-muted">Unbilled approved hours affected</dt>
           <dd className="tabular mt-0.5 text-ink">
-            {formatHoursValue(impact.unbilledHours)} <span className="text-ink-muted">({formatNumber(impact.unbilledRecords)} {pluralize(impact.unbilledRecords, 'record')})</span>
+            {formatHoursValue(impact.unbilledHours)} <span className="text-ink-muted">({pluralize(impact.unbilledRecords, 'record')})</span>
           </dd>
         </div>
         <div>
@@ -57,7 +57,7 @@ export function RateImpactPreview({ impact, currency, effectiveFrom }) {
       <ul className="space-y-1 border-t border-line px-4 py-3 text-xs text-ink-secondary">
         <li>
           {impact.billedRecords > 0
-            ? `${formatNumber(impact.billedRecords)} ${pluralize(impact.billedRecords, 'record')} in this period ${impact.billedRecords === 1 ? 'is' : 'are'} already on finalized invoices and stay unchanged — finalized invoices are never rewritten.`
+            ? `${pluralize(impact.billedRecords, 'record')} in this period ${impact.billedRecords === 1 ? 'is' : 'are'} already on finalized invoices and stay unchanged — finalized invoices are never rewritten.`
             : 'No records in this period are on finalized invoices.'}
         </li>
         <li>
