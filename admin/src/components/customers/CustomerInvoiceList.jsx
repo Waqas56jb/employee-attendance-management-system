@@ -10,7 +10,7 @@ import { invoiceLabel } from '../../services/invoiceService';
 import { formatDate, formatPeriod } from '../../utils/dateUtils';
 
 /** Invoices of ONE customer. `invoices` must already be limited to this customer. */
-export function CustomerInvoiceList({ customer, invoices, title = 'Invoices', pageSize = 10, compact = false }) {
+export function CustomerInvoiceList({ customer, invoices, title = 'Invoices', description, pageSize = 10, compact = false }) {
   const navigate = useNavigate();
   const createButton = (
     <Button size="sm" icon={FilePlus2} to={`/invoices/new?customer=${customer.id}`}>
@@ -31,7 +31,7 @@ export function CustomerInvoiceList({ customer, invoices, title = 'Invoices', pa
       ),
     },
     { key: 'issue', header: 'Issued', sortValue: (i) => i.issueDate, render: (i) => <span className="whitespace-nowrap">{i.finalizedAt ? formatDate(i.issueDate) : <span className="text-ink-muted">Draft</span>}</span> },
-    { key: 'due', header: 'Due', sortValue: (i) => i.dueDate, render: (i) => <span className="whitespace-nowrap">{formatDate(i.dueDate)}</span>, mobile: !compact },
+    { key: 'due', header: 'Due', sortValue: (i) => i.dueDate, render: (i) => <span className="whitespace-nowrap">{formatDate(i.dueDate)}</span> },
     {
       key: 'period',
       header: 'Billing period',
@@ -55,7 +55,7 @@ export function CustomerInvoiceList({ customer, invoices, title = 'Invoices', pa
 
   return (
     <Card>
-      <CardHeader title={title} icon={FileText} description={`${invoices.length} invoice${invoices.length === 1 ? '' : 's'} for ${customer.companyName}`} action={createButton} />
+      <CardHeader title={title} icon={FileText} description={description ?? `${invoices.length} invoice${invoices.length === 1 ? '' : 's'} for ${customer.companyName}`} action={createButton} />
       <DataTable
         columns={visibleColumns}
         rows={invoices}

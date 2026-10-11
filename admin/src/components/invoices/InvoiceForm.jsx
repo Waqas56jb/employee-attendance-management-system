@@ -154,9 +154,18 @@ export function InvoiceForm({ draft = null, query = {} }) {
             excludeInvoiceId: draftId ?? undefined,
           })
         : null,
-    // `key` captures the selection fields.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [prepareInvoiceLines, selectionValid, key, values.currency, draftId],
+    [
+      prepareInvoiceLines,
+      selectionValid,
+      values.customerId,
+      values.billingPeriodStart,
+      values.billingPeriodEnd,
+      values.projectId,
+      values.employeeId,
+      values.currency,
+      values.grouping,
+      draftId,
+    ],
   );
 
   const discountMinor = discountMinorOf(values);
