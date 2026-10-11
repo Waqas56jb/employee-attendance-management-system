@@ -1,0 +1,174 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Design tokens
+ * -------------
+ * Every color in the UI comes from these RGB triplets. Tailwind maps them to
+ * utilities (bg-surface, text-ink, border-line, ...). Dark mode only swaps
+ * the values, so components never need separate dark: variants.
+ *
+ * Text rule: use brand-700 for colored text/links, brand-600 for filled
+ * backgrounds (buttons, active indicators).
+ */
+:root {
+  color-scheme: light;
+
+  --canvas: 247 248 250;
+  --surface: 255 255 255;
+  --subtle: 243 244 246;
+  --line: 228 231 236;
+  --line-strong: 209 213 219;
+
+  --ink: 15 23 42;
+  --ink-secondary: 71 85 105;
+  --ink-muted: 100 116 139;
+
+  --brand-50: 238 242 255;
+  --brand-100: 224 231 255;
+  --brand-200: 199 210 254;
+  --brand-500: 99 102 241;
+  --brand-600: 79 70 229;
+  --brand-700: 67 56 202;
+
+  --success-soft: 236 253 245;
+  --success: 16 185 129;
+  --success-ink: 4 120 87;
+  --warning-soft: 255 251 235;
+  --warning: 245 158 11;
+  --warning-ink: 180 83 9;
+  --danger-soft: 254 242 242;
+  --danger: 239 68 68;
+  --danger-ink: 185 28 28;
+  --info-soft: 239 246 255;
+  --info: 59 130 246;
+  --info-ink: 29 78 216;
+  --neutral-soft: 241 245 249;
+  --neutral-ink: 71 85 105;
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+
+  --canvas: 10 13 22;
+  --surface: 17 21 33;
+  --subtle: 25 31 46;
+  --line: 37 44 61;
+  --line-strong: 55 64 84;
+
+  --ink: 236 239 245;
+  --ink-secondary: 178 188 204;
+  --ink-muted: 138 150 170;
+
+  --brand-50: 30 31 62;
+  --brand-100: 40 41 84;
+  --brand-200: 70 68 146;
+  --brand-500: 129 140 248;
+  --brand-600: 99 102 241;
+  --brand-700: 165 180 252;
+
+  --success-soft: 14 45 36;
+  --success: 52 211 153;
+  --success-ink: 110 231 183;
+  --warning-soft: 54 40 10;
+  --warning: 251 191 36;
+  --warning-ink: 252 211 77;
+  --danger-soft: 64 22 28;
+  --danger: 248 113 113;
+  --danger-ink: 252 165 165;
+  --info-soft: 23 37 70;
+  --info: 96 165 250;
+  --info-ink: 147 197 253;
+  --neutral-soft: 30 37 52;
+  --neutral-ink: 178 188 204;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-canvas font-sans text-sm text-ink antialiased;
+    font-feature-settings: 'cv11', 'ss01';
+    min-width: 320px;
+  }
+
+  #root {
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  /* Keyboard focus is always visible; mouse clicks do not leave rings behind. */
+  :focus-visible {
+    outline: 2px solid rgb(var(--brand-500));
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+
+  ::selection {
+    background: rgb(var(--brand-200));
+  }
+
+  input[type='date']::-webkit-calendar-picker-indicator {
+    opacity: 0.6;
+    cursor: pointer;
+  }
+
+  [data-theme='dark'] input[type='date']::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+  }
+}
+
+@layer components {
+  .card {
+    @apply rounded-xl border border-line bg-surface shadow-card;
+  }
+
+  .input {
+    @apply block w-full rounded-lg border border-line-strong bg-surface px-3 py-2 text-sm text-ink
+      placeholder:text-ink-muted transition-colors duration-150
+      hover:border-ink-muted/60
+      focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/15
+      disabled:cursor-not-allowed disabled:bg-subtle disabled:text-ink-muted;
+  }
+
+  .input[aria-invalid='true'] {
+    @apply border-danger focus:border-danger focus:ring-danger/15;
+  }
+
+  .label {
+    @apply mb-1.5 block text-sm font-medium text-ink;
+  }
+
+  .skeleton {
+    @apply animate-pulse rounded-md bg-subtle;
+  }
+
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@layer utilities {
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(var(--line-strong)) transparent;
+  }
+
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
