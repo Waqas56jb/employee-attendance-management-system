@@ -171,6 +171,13 @@
 }
 
 @layer utilities {
+  /* Keep visually hidden content anchored inside its container so it never
+     widens the page (e.g. labels inside horizontally scrolling tables). */
+  .sr-only {
+    left: 0;
+    top: 0;
+  }
+
   .scrollbar-thin {
     scrollbar-width: thin;
     scrollbar-color: rgb(var(--line-strong)) transparent;

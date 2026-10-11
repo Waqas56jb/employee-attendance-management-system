@@ -12,6 +12,7 @@ import { config } from '../../services/config';
 import { getErrorMessage } from '../../services/errors';
 import { PROJECT_STATUS } from '../../services/projectService';
 import { cn } from '../../utils/cn';
+import { haptic } from '../../utils/pwa';
 import { formatLongDate } from '../../utils/formatters';
 import { createCheckInSchema } from '../../utils/validation';
 import { Alert } from '../common/Alert';
@@ -154,6 +155,7 @@ export function CheckInDialog({ open, onClose, defaultProjectId }) {
     setSubmitError('');
     try {
       const record = await checkIn({ ...values, location: geo.status === 'captured' ? geo.location : null });
+      haptic();
       toast.success('Shift started', {
         description: `${projectsById[record.projectId]?.name} · checked in at ${fmt.time(record.checkInAt)}`,
       });

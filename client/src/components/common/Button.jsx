@@ -43,7 +43,7 @@ export const Button = forwardRef(function Button(
   ref,
 ) {
   const classes = cn(
-    'inline-flex shrink-0 select-none items-center justify-center whitespace-nowrap font-medium transition-colors duration-150',
+    'inline-flex shrink-0 select-none items-center justify-center whitespace-nowrap font-medium transition-[color,background-color,border-color,transform] duration-150 active:scale-[0.98]',
     'disabled:pointer-events-none disabled:opacity-55 aria-disabled:pointer-events-none aria-disabled:opacity-55',
     VARIANTS[variant],
     SIZES[size],

@@ -4,7 +4,8 @@
  */
 export function ChartDataTable({ caption, columns, rows, getRowId = (row, i) => row.key ?? row.id ?? i }) {
   return (
-    <table className="sr-only">
+    <div className="sr-only">
+    <table>
       <caption>{caption}</caption>
       <thead>
         <tr>
@@ -25,5 +26,6 @@ export function ChartDataTable({ caption, columns, rows, getRowId = (row, i) => 
         ))}
       </tbody>
     </table>
+    </div>
   );
 }

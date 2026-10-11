@@ -57,7 +57,7 @@ export function AttendanceHistoryTable({ records, sort, onSort, now }) {
   return (
     <>
       {/* Desktop / tablet table */}
-      <div className="hidden overflow-x-auto md:block">
+      <div className="hidden overflow-x-auto lg:block">
         <table className="w-full min-w-[860px] text-sm">
           <caption className="sr-only">Attendance records</caption>
           <thead className="border-b border-line bg-canvas/70">
@@ -119,7 +119,7 @@ export function AttendanceHistoryTable({ records, sort, onSort, now }) {
       </div>
 
       {/* Mobile cards */}
-      <ul className="divide-y divide-line md:hidden">
+      <ul className="divide-y divide-line lg:hidden">
         {records.map((record) => {
           const names = nameOf(record);
           const active = record.status === 'active';

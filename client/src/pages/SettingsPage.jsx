@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Bell, CalendarClock, Database, Monitor, Moon, Palette, RotateCcw, Save, Sun, UserRound } from 'lucide-react';
+import { Bell, CalendarClock, Database, Monitor, Smartphone, Moon, Palette, RotateCcw, Save, Sun, UserRound } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '../components/common/Button';
+import { InstallAppSettings } from '../components/common/InstallApp';
 import { Card, CardHeader } from '../components/common/Card';
 import { ConfirmDialog } from '../components/common/ConfirmDialog';
 import { FormField, fieldAria } from '../components/common/FormField';
@@ -173,6 +174,11 @@ export function SettingsPage() {
               </div>
             ))}
           </div>
+        </Card>
+
+        <Card>
+          <CardHeader title="Install app" description="Use ShiftLine like a native app on your phone." icon={Smartphone} />
+          <InstallAppSettings />
         </Card>
 
         <SecuritySettings />

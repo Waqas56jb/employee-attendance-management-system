@@ -106,7 +106,7 @@ export function ActivityLogTable({ activity, filters, setFilter, lookups, curren
         const count = changedCount(a);
         if (!a.reason && !count) return <span className="text-ink-muted">—</span>;
         return (
-          <div className="min-w-[12rem] max-w-md space-y-1">
+          <div className="max-w-md space-y-1 md:min-w-[12rem]">
             {a.reason && <p className="text-sm text-ink-secondary">“{a.reason}”</p>}
             {count > 0 && (
               <details className="group rounded-md border border-line bg-subtle/40">

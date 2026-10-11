@@ -39,8 +39,8 @@ export function ValueDiff({ previous, next, lookups, currency }) {
   const keys = [...new Set([...Object.keys(previous ?? {}), ...Object.keys(next ?? {})])];
   if (keys.length === 0) return null;
   return (
-    <div className="overflow-x-auto">
-      <table className="w-full min-w-[18rem] text-left text-xs">
+    <div className="min-w-0 max-w-full">
+      <table className="w-full table-fixed break-words text-left text-xs">
         <thead>
           <tr className="text-2xs uppercase tracking-wide text-ink-muted">
             <th scope="col" className="py-1 pr-3 font-semibold">Field</th>

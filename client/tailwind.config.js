@@ -7,6 +7,8 @@ const token = (name) => `rgb(var(--${name}) / <alpha-value>)`;
 export default {
   content: ['./index.html', './src/**/*.{js,jsx}'],
   darkMode: ['class', '[data-theme="dark"]'],
+  // Hover styles only on devices with a real pointer, so taps on phones don't leave "stuck" hover states.
+  future: { hoverOnlyWhenSupported: true },
   theme: {
     extend: {
       fontFamily: {

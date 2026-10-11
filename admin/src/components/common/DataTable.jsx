@@ -81,7 +81,7 @@ export function DataTable({
 
   return (
     <div>
-      <div className={clsx('scrollbar-thin overflow-x-auto', mobileCards && 'hidden md:block')}>
+      <div className={clsx('scrollbar-thin relative overflow-x-auto', mobileCards && 'hidden md:block')}>
         <table className="table-base">
           {caption && <caption className="sr-only">{caption}</caption>}
           <thead>
@@ -152,11 +152,11 @@ export function DataTable({
                 onClick={onRowClick ? (e) => !e.target.closest('a,button,input,select,label') && onRowClick(row) : undefined}
               >
                 <div className="mb-2 min-w-0 font-medium text-ink">{renderCell(primary, row)}</div>
-                <dl className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
+                <dl className="grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)] gap-x-4 gap-y-2 text-sm">
                   {rest.map((column) => (
                     <div key={column.key} className={clsx('min-w-0', column.key === 'actions' && 'col-span-2')}>
                       {column.key !== 'actions' && <dt className="text-2xs font-medium uppercase tracking-wide text-ink-muted">{column.header}</dt>}
-                      <dd className="mt-0.5 min-w-0 break-words text-ink">{renderCell(column, row)}</dd>
+                      <dd className="mt-0.5 min-w-0 break-words text-ink [&_.whitespace-nowrap]:whitespace-normal">{renderCell(column, row)}</dd>
                     </div>
                   ))}
                 </dl>

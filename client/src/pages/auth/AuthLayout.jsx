@@ -45,7 +45,7 @@ export function AuthLayout({ children }) {
         </p>
       </aside>
 
-      <main className="flex flex-col px-4 py-8 sm:px-8 lg:px-16">
+      <main className="safe-top safe-bottom flex flex-col px-4 py-8 sm:px-8 lg:px-16">
         <div className="lg:hidden">
           <AppLogo showTagline />
         </div>

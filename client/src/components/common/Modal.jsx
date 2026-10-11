@@ -103,7 +103,10 @@ export function Modal({
           className,
         )}
       >
-        <div className="flex items-start gap-3 border-b border-line px-5 py-4 sm:px-6">
+        <div className="flex justify-center pt-2 sm:hidden" aria-hidden="true">
+          <span className="h-1 w-10 rounded-full bg-line-strong" />
+        </div>
+        <div className="flex items-start gap-3 border-b border-line px-5 pb-4 pt-2 sm:px-6 sm:pt-4">
           {Icon && (
             <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand-50 text-brand-700">
               <Icon size={18} aria-hidden="true" />
@@ -130,7 +133,7 @@ export function Modal({
             </button>
           )}
         </div>
-        <div className="scrollbar-thin flex-1 overflow-y-auto px-5 py-5 sm:px-6">{children}</div>
+        <div className={cn('scrollbar-thin flex-1 overscroll-contain px-5 py-5 sm:px-6', !footer && 'safe-bottom', 'overflow-y-auto')}>{children}</div>
         {footer && (
           <div className="safe-bottom flex flex-col-reverse gap-2 border-t border-line bg-canvas/60 px-5 py-4 sm:flex-row sm:justify-end sm:px-6">
             {footer}

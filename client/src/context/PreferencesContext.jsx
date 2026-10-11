@@ -21,6 +21,8 @@ function applyTheme(theme) {
   const dark =
     theme === 'dark' || (theme === 'system' && window.matchMedia?.('(prefers-color-scheme: dark)').matches);
   document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+  // Colors the phone status bar / browser chrome to match the app bar.
+  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#111521' : '#FFFFFF');
 }
 
 /** Device-level display preferences, persisted in LocalStorage. */

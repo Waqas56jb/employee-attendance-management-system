@@ -13,6 +13,7 @@ import { getErrorMessage } from '../../services/errors';
 import { elapsedMs, minutesBetween } from '../../utils/dateUtils';
 import { formatDayLabel, formatDuration, formatElapsed } from '../../utils/formatters';
 import { checkOutSchema } from '../../utils/validation';
+import { haptic } from '../../utils/pwa';
 import { Alert } from '../common/Alert';
 import { Button } from '../common/Button';
 import { FormField } from '../common/FormField';
@@ -73,6 +74,7 @@ export function CheckOutDialog({ open, onClose }) {
     setSubmitError('');
     try {
       const record = await checkOut({ note: completionNote, location: geo.status === 'captured' ? geo.location : null });
+      haptic();
       toast.success('Shift completed', {
         description: `${formatDuration(record.durationMinutes)} recorded for ${projectsById[record.projectId]?.name ?? 'your project'}.`,
       });

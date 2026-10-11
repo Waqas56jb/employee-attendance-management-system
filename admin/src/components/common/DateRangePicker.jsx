@@ -34,11 +34,11 @@ export function DateRangePicker({ value, onChange, presets = PERIOD_PRESETS, all
           className={compact ? 'w-36' : 'w-40'}
         />
       </div>
-      <div className="flex min-w-0 items-center gap-1.5">
+      <div className="flex w-full min-w-0 items-center gap-1.5 sm:w-auto">
         <input
           type="date"
           aria-label={`${label} start date`}
-          className="input h-9 w-[9.5rem] py-1.5"
+          className="input h-9 min-w-0 flex-1 py-1.5 sm:w-[9.5rem] sm:flex-none"
           value={value.from}
           max={value.to || undefined}
           onChange={(e) => onChange({ ...value, from: e.target.value })}
@@ -49,7 +49,7 @@ export function DateRangePicker({ value, onChange, presets = PERIOD_PRESETS, all
         <input
           type="date"
           aria-label={`${label} end date`}
-          className="input h-9 w-[9.5rem] py-1.5"
+          className="input h-9 min-w-0 flex-1 py-1.5 sm:w-[9.5rem] sm:flex-none"
           value={value.to}
           min={value.from || undefined}
           onChange={(e) => onChange({ ...value, to: e.target.value })}

@@ -27,6 +27,4 @@ export const NAV_SECTIONS = [
   },
 ];
 
-export const MOBILE_PRIMARY = ['/dashboard', '/check-in-out', '/attendance', '/projects'];
-
 export const ALL_NAV_ITEMS = NAV_SECTIONS.flatMap((s) => s.items);

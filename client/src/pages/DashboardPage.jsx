@@ -1,4 +1,5 @@
 import { CalendarRange, CheckCircle2, Clock, FolderKanban } from 'lucide-react';
+import { InstallAppCard } from '../components/common/InstallApp';
 import { ActiveShiftCard } from '../components/attendance/ActiveShiftCard';
 import { StatCard } from '../components/common/StatCard';
 import { DashboardGreeting } from '../components/dashboard/DashboardGreeting';
@@ -26,6 +27,7 @@ export function DashboardPage() {
   return (
     <PageContainer>
       <DashboardGreeting />
+      <InstallAppCard />
 
       <section aria-label="Summary" className="grid grid-cols-2 gap-3 sm:gap-4 xl:grid-cols-4">
         <StatCard

@@ -24,6 +24,24 @@ The employee-facing frontend of an attendance and workforce management system. E
 | **Settings** | Display name, light/dark/system theme, 12/24-hour clock, date format, week start day, per-category notification toggles, a password-change form (clearly marked unavailable in demo mode), and a reset for the demo data. Every setting changes the UI immediately. |
 | **Quality** | Responsive from 320px to desktop, keyboard-accessible dialogs with a focus trap, visible focus rings, a skip link, labelled controls, loading skeletons, empty states, and a 404 page. |
 
+## Mobile app, tablet and desktop
+
+Employees mostly use the portal on their phones, so it is built as an **installable Progressive Web App (PWA)**. The layout adapts to the device:
+
+| Device | Layout |
+| --- | --- |
+| **Phone** (< 768px) | App shell with a native-style **app bar** and a **bottom tab bar**: Home · Attendance · a raised **Check In** button · Projects · More. During a shift the centre button turns green and shows the live timer. Large page titles move into the app bar as you scroll. Detail pages get a back button. Dialogs open as bottom sheets. The tab bar hides while the keyboard is open. |
+| **Tablet** (768–1023px) | Compact icon rail on the left plus the top bar. Lists use card layouts. |
+| **Laptop / desktop** (≥ 1024px) | Full sidebar, top bar and data tables. |
+
+App behaviour on phones:
+
+- **Install to home screen.** Android/Chrome shows an *Install app* button (on the dashboard and in Settings). On iPhone, the app shows the *Share → Add to Home Screen* steps. Once installed, the app opens full-screen with its own icon, splash colour and shortcuts (Check In, Attendance).
+- **Works offline.** A service worker caches the app, and demo data lives on the device. An offline banner appears when there is no connection.
+- **Native feel.** Safe areas for notched screens, status-bar colour that follows the theme, no tap flash or double-tap zoom, no iOS zoom on input focus, press feedback, a short vibration on check-in/check-out (Android), and no bounce scrolling in the installed app.
+
+The PWA (service worker and install) only works on the **production build** served over **HTTPS** (or `localhost`): `npm run build && npm run preview`, or any static host. The dev server (`npm run dev`) does not register the service worker.
+
 ## Technology stack
 
 - **React 18** + **Vite 5** (JavaScript / JSX)

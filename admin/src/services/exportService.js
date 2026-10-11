@@ -112,7 +112,8 @@ export async function generateInvoicePdf(invoice, ctx) {
   doc.setFontSize(9);
   doc.setTextColor(...MUTED);
   doc.text(pdfText(joinAddress(business.address)), margin + 56, y + 22);
-  doc.text(pdfText([business.email, business.phone, business.website].filter(Boolean).join('  ·  ')), margin + 56, y + 34);
+  doc.text(pdfText([business.email, business.phone].filter(Boolean).join('  ·  ')), margin + 56, y + 34);
+  if (business.website) doc.text(pdfText(business.website), margin + 56, y + 46);
 
   doc.setTextColor(...INK);
   doc.setFont('helvetica', 'bold');
@@ -128,7 +129,7 @@ export async function generateInvoicePdf(invoice, ctx) {
     doc.text('VOID', pageWidth - margin, y + 40, { align: 'right' });
   }
 
-  y += 72;
+  y += 80;
   doc.setDrawColor(...LINE);
   doc.line(margin, y, pageWidth - margin, y);
   y += 22;
@@ -191,6 +192,7 @@ export async function generateInvoicePdf(invoice, ctx) {
     },
     didParseCell: (data) => {
       if (data.section === 'body') data.cell.styles.lineWidth = { bottom: 0.5 };
+      if (data.section === 'head' && data.column.index > 0) data.cell.styles.halign = 'right';
     },
   });
   y = doc.lastAutoTable.finalY + 16;
@@ -254,6 +256,9 @@ export async function generateInvoicePdf(invoice, ctx) {
       styles: { font: 'helvetica', fontSize: 8, cellPadding: 4, textColor: INK },
       headStyles: { fillColor: [243, 244, 246], textColor: MUTED, fontStyle: 'bold' },
       columnStyles: { 3: { halign: 'right' } },
+      didParseCell: (data) => {
+        if (data.section === 'head' && data.column.index === 3) data.cell.styles.halign = 'right';
+      },
     });
     y = doc.lastAutoTable.finalY + 20;
   }
