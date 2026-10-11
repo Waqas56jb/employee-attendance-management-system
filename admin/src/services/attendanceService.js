@@ -61,6 +61,7 @@ function assertNoOverlap(draft, { id, employeeId, checkInAt, checkOutAt }) {
 function flagAffectedInvoices(draft, record, description) {
   const affected = [];
   draft.invoices.forEach((invoice) => {
+    if (invoice.status === INVOICE_STATUS.VOID) return;
     const contains = invoice.lineItems.some((l) => (l.attendanceRecordIds ?? []).includes(record.id));
     if (!contains) return;
     affected.push(invoice);

@@ -119,7 +119,8 @@ export function updateCustomer(id, data) {
       });
     }
     const before = { ...customer };
-    Object.assign(customer, next, { updatedAt: nowIso() });
+    // Status changes go through setCustomerStatus (archive rules, audit reason).
+    Object.assign(customer, next, { status: before.status, updatedAt: nowIso() });
     const diff = diffFields(before, customer, AUDITED_FIELDS);
     if (diff) {
       logActivity(draft, {

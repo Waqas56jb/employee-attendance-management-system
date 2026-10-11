@@ -93,7 +93,8 @@ export function updateEmployee(id, data) {
     const employee = findOrThrow(draft.employees, id, 'Employee');
     assertUnique(draft, data, id);
     const before = { ...employee };
-    Object.assign(employee, normalize(data), { updatedAt: nowIso() });
+    // Status changes go through setEmployeeStatus (open-shift checks, audit reason).
+    Object.assign(employee, normalize(data), { status: before.status, updatedAt: nowIso() });
     if (data.assignedProjectIds) {
       syncAssignments(draft, employee, data.assignedProjectIds, { previousIds: before.assignedProjectIds });
     }

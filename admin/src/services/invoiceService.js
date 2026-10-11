@@ -24,7 +24,7 @@ import {
   isLineAdjusted,
   summarizeBillingRows,
 } from '../utils/calculations';
-import { formatMoney, toMinor } from '../utils/currency';
+import { formatMoney, toMajor, toMinor } from '../utils/currency';
 import { addDaysKey, formatDate, nowIso, todayKey, toDate, toDateKey } from '../utils/dateUtils';
 import { endOfMonth } from 'date-fns';
 import { allocateInvoiceNumber, draftLabel } from '../utils/invoiceNumber';
@@ -302,7 +302,7 @@ export function finalizeInvoice(id) {
     if (invoice.needsRecalculation) {
       throw new ServiceError('Attendance on this draft changed. Recalculate the draft before finalizing.', { code: 'needs_recalculation' });
     }
-    const { customer } = validateDraft(draft, { ...invoice, discountValue: invoice.discountType === 'fixed' ? invoice.discountValue / 100 : invoice.discountValue }, id);
+    const { customer } = validateDraft(draft, { ...invoice, discountValue: invoice.discountType === 'fixed' ? toMajor(invoice.discountValue, invoice.currency) : invoice.discountValue }, id);
     const ids = invoice.lineItems.flatMap((l) => l.attendanceRecordIds ?? []);
     const alreadyBilled = draft.attendance.filter((a) => ids.includes(a.id) && a.invoiceId && a.invoiceId !== id);
     if (alreadyBilled.length) {

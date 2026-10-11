@@ -93,7 +93,7 @@ export const customerSchema = z.object({
   paymentTerms: z.coerce.number().int('Whole days only.').min(0, 'Cannot be negative.').max(180, 'At most 180 days.'),
   currency: currencyCode,
   defaultHourlyRate: moneyInput('Hourly rate', { allowZero: false }),
-  taxRate: z.union([percentInput('Tax rate'), z.literal('')]).optional(),
+  taxRate: z.union([z.literal(''), percentInput('Tax rate')]).optional(),
   notes: optionalText(1000),
   status: z.enum(['active', 'inactive', 'archived']),
 });
@@ -110,7 +110,7 @@ export const projectSchema = z
     status: z.enum(['planned', 'active', 'on_hold', 'completed', 'archived']),
     assignedEmployeeIds: z.array(z.string()).default([]),
     instructions: optionalText(2000),
-    targetHours: z.union([z.coerce.number().min(0, 'Cannot be negative.').max(100000), z.literal('')]).optional(),
+    targetHours: z.union([z.literal(''), z.coerce.number().min(0, 'Cannot be negative.').max(100000)]).optional(),
     internalNotes: optionalText(2000),
   })
   .refine((v) => !v.endDate || v.endDate >= v.startDate, {
